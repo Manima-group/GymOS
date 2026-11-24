@@ -1,0 +1,41 @@
+# One small VPS (2 vCPU / 2-4 GB, ~₹800-1500/mo) runs everything for the first 50-100 gyms.
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: gymos
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-gymos}
+      POSTGRES_DB: gymos
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U gymos"], interval: 5s, retries: 10 }
+
+  api:
+    build: ./backend
+    restart: unless-stopped
+    env_file: ./backend/.env
+    environment:
+      DATABASE_URL: postgresql+psycopg://gymos:${DB_PASSWORD:-gymos}@db:5432/gymos
+    depends_on: { db: { condition: service_healthy } }
+    ports: ["8000:8000"]
+
+  # Reminders + SaaS billing lifecycle: runs every hour (idempotent, deduped).
+  scheduler:
+    build: ./backend
+    restart: unless-stopped
+    env_file: ./backend/.env
+    environment:
+      DATABASE_URL: postgresql+psycopg://gymos:${DB_PASSWORD:-gymos}@db:5432/gymos
+    depends_on: [api]
+    command: ["sh", "-c", "while true; do python -m app.jobs.daily; sleep 3600; done"]
+
+  web:
+    build:
+      context: ./frontend
+      args: { NEXT_PUBLIC_API_URL: "${PUBLIC_API_URL:-http://localhost:8000/api/v1}" }
+    restart: unless-stopped
+    depends_on: [api]
+    ports: ["3000:3000"]
+
+volumes:
+  pgdata:

@@ -1,0 +1,147 @@
+node_modules/
+.next/
+__pycache__/
+.env
+.env.local
+.pytest_cache/
+
+# Python virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+
+# Node.js / Next.js
+node_modules/
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.key
+
+# Database files and backups
+*.sqlite3
+*.db
+*.dump
+*.backup
+
+# Logs
+*.log
+logs/
+
+# IDE and operating system
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Temporary files
+tmp/
+temp/
+
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Frontend
+node_modules/
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+.vercel/
+
+# Environment and credentials
+.env
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.key
+
+# Database and logs
+*.db
+*.sqlite3
+*.dump
+*.backup
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+
+# Temporary files
+tmp/
+temp/
+
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+.coverage
+
+# Next.js
+node_modules/
+.next/
+out/
+dist/
+build/
+.vercel/
+*.tsbuildinfo
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.key
+
+# Database and logs
+*.db
+*.sqlite3
+*.dump
+*.backup
+*.log
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+
